@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workout/data/workout_data.dart';
@@ -13,6 +11,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+
+    Provider.of<WorkoutData>(context, listen: false).initializeWorkoutList();
+  }
+
   // text controller
   final newWorkoutNameController = TextEditingController();
   // create a new workout
@@ -94,7 +99,7 @@ class _HomePageState extends State<HomePage> {
             title: Text(value.getWorkoutList()[index].name),
             trailing: IconButton(
                 onPressed: () =>
-                 goToWorkoutPage(value.getWorkoutList()[index].name),
+                    goToWorkoutPage(value.getWorkoutList()[index].name),
                 icon: Icon(Icons.arrow_forward_ios)),
           ),
         ),

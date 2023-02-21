@@ -12,6 +12,12 @@ class WorkoutPage extends StatefulWidget {
 }
 
 class _WorkoutPageState extends State<WorkoutPage> {
+  // checkbox was tapped
+  void onCheckBoxChanged(String workoutName, String exerciseName) {
+    Provider.of<WorkoutData>(context, listen: false)
+        .checkOffExercise(workoutName, exerciseName);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<WorkoutData>(
@@ -20,26 +26,34 @@ class _WorkoutPageState extends State<WorkoutPage> {
         body: ListView.builder(
           itemCount: value.numberOdExercisesInWorkout(widget.workoutName),
           itemBuilder: (context, index) => ExerciseTitle(
-              exerciseName: value
+            exerciseName: value
+                .getRelevantWorkout(widget.workoutName)
+                .exercises[index]
+                .name,
+            weight: value
+                .getRelevantWorkout(widget.workoutName)
+                .exercises[index]
+                .weight,
+            reps: value
+                .getRelevantWorkout(widget.workoutName)
+                .exercises[index]
+                .reps,
+            sets: value
+                .getRelevantWorkout(widget.workoutName)
+                .exercises[index]
+                .sets,
+            isCompleted: value
+                .getRelevantWorkout(widget.workoutName)
+                .exercises[index]
+                .isCompleted,
+            onCheckBoxChanged: (val) => onCheckBoxChanged(
+              widget.workoutName,
+              value
                   .getRelevantWorkout(widget.workoutName)
                   .exercises[index]
                   .name,
-              weight: value
-                  .getRelevantWorkout(widget.workoutName)
-                  .exercises[index]
-                  .weight,
-              reps: value
-                  .getRelevantWorkout(widget.workoutName)
-                  .exercises[index]
-                  .reps,
-              sets: value
-                  .getRelevantWorkout(widget.workoutName)
-                  .exercises[index]
-                  .sets,
-              isCompleted: value
-                  .getRelevantWorkout(widget.workoutName)
-                  .exercises[index]
-                  .isCompleted,),
+            ),
+          ),
         ),
       ),
     );

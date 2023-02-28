@@ -8,8 +8,11 @@ String todaysDateYYYYMMDD() {
 
   // month in the format mm
   String month = dateTimeObject.month.toString();
+  if (month.length == 1) {
+    month = '0$month';
+  }
 
-  // day in the format mm
+  // day in the format dd
   String day = dateTimeObject.day.toString();
   if (day.length == 1) {
     day = '0$day';
@@ -25,7 +28,7 @@ String todaysDateYYYYMMDD() {
 DateTime createDateTimeObject(String yyyymmdd) {
   int yyyy = int.parse(yyyymmdd.substring(0, 4));
   int mm = int.parse(yyyymmdd.substring(4, 6));
-  int dd = int.parse(yyyymmdd.substring(6, 8));
+  int dd = int.parse(yyyymmdd.substring(6, 7));
 
   DateTime dateTimeObject = DateTime(yyyy, mm, dd);
   return dateTimeObject;
@@ -42,7 +45,7 @@ String convertDateTimeToYYYYMMDD(DateTime dateTime) {
     month = '0$month';
   }
 
-  // day in the format mm
+  // day in the format dd
   String day = dateTime.day.toString();
   if (day.length == 1) {
     day = '0$day';

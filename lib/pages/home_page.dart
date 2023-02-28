@@ -110,9 +110,10 @@ class _HomePageState extends State<HomePage> {
               itemBuilder: (context, index) => ListTile(
                 title: Text(value.getWorkoutList()[index].name),
                 trailing: IconButton(
-                    onPressed: () =>
-                        goToWorkoutPage(value.getWorkoutList()[index].name),
-                    icon: Icon(Icons.arrow_forward_ios)),
+                  icon: Icon(Icons.arrow_forward_ios),
+                  onPressed: () =>
+                      goToWorkoutPage(value.getWorkoutList()[index].name),
+                ),
               ),
             ),
           ],
